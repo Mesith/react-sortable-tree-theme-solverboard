@@ -25,6 +25,7 @@ class MinimalThemeNodeContentRenderer extends Component {
       canDrag,
       node,
       title,
+      details,
       subtitle,
       draggedNode,
       path,
@@ -47,57 +48,69 @@ class MinimalThemeNodeContentRenderer extends Component {
     } = this.props;
     const nodeTitle = title || node.title;
     const nodeSubtitle = subtitle || node.subtitle;
+    const nodeDetails = details || node.details;
 
     const isDraggedDescendant = draggedNode && isDescendant(draggedNode, node);
     const isLandingPadActive = !didDrop && isDragging;
-    const nodeContent = connectDragPreview( <div
-        className={
-          styles.rowContents +
-          (isSearchMatch ? ` ${styles.rowSearchMatch}` : '') +
-          (isSearchFocus ? ` ${styles.rowSearchFocus}` : '') +
-          (!canDrag ? ` ${styles.rowContentsDragDisabled}` : '')
-        }
-      >
-        <div className={styles.rowLabel}>
-          <span
-            className={
-              styles.rowTitle +
-              (node.subtitle ? ` ${styles.rowTitleWithSubtitle}` : '')
-            }
-          >
-            {typeof nodeTitle === 'function'
-              ? nodeTitle({
-                  node,
-                  path,
-                  treeIndex,
-                })
-              : nodeTitle}
+    const nodeContent = connectDragPreview(<div
+      className={
+        styles.rowContents +
+        (isSearchMatch ? ` ${styles.rowSearchMatch}` : '') +
+        (isSearchFocus ? ` ${styles.rowSearchFocus}` : '') +
+        (!canDrag ? ` ${styles.rowContentsDragDisabled}` : '')
+      }
+    >
+      <div className={styles.rowLabel}>
+        <span
+          className={
+            styles.rowTitle + ' foo ' +
+            (node.subtitle ? ` ${styles.rowTitleWithSubtitle}` : '')
+          }
+        >
+          {typeof nodeTitle === 'function'
+            ? nodeTitle({
+              node,
+              path,
+              treeIndex,
+            })
+            : nodeTitle}
+        </span>
+
+        {nodeSubtitle && (
+          <span className={styles.rowSubtitle}>
+            {typeof nodeSubtitle === 'function'
+              ? nodeSubtitle({
+                node,
+                path,
+                treeIndex,
+              })
+              : nodeSubtitle}
           </span>
-
-          {nodeSubtitle && (
-            <span className={styles.rowSubtitle}>
-              {typeof nodeSubtitle === 'function'
-                ? nodeSubtitle({
-                    node,
-                    path,
-                    treeIndex,
-                  })
-                : nodeSubtitle}
-            </span>
-          )}
-        </div>
-
-        <div className={styles.rowToolbar}>
-          {buttons.map((btn, index) => (
-            <div
-              key={index} // eslint-disable-line react/no-array-index-key
-              className={styles.toolbarButton}
-            >
-              {btn}
-            </div>
-          ))}
-        </div>
+        )}
+        {nodeDetails && (
+          <span className={styles.rowDetails}>
+            {typeof nodeDetails === 'function'
+              ? nodeDetails({
+                node,
+                path,
+                treeIndex,
+              })
+              : nodeDetails}
+          </span>
+        )}
       </div>
+
+      <div className={styles.rowToolbar}>
+        {buttons.map((btn, index) => (
+          <div
+            key={index} // eslint-disable-line react/no-array-index-key
+            className={`sortable-row-button ${styles.toolbarButton}`}
+          >
+            {btn}
+          </div>
+        ))}
+      </div>
+    </div>
     );
 
     return (
@@ -138,7 +151,7 @@ class MinimalThemeNodeContentRenderer extends Component {
           }
         >
           <div
-            className={
+            className={'i-am-a-foo-row ' +
               styles.row +
               (isLandingPadActive ? ` ${styles.rowLandingPad}` : '') +
               (isLandingPadActive && !canDrop ? ` ${styles.rowCancelPad}` : '') +
@@ -147,6 +160,7 @@ class MinimalThemeNodeContentRenderer extends Component {
             style={{
               opacity: isDraggedDescendant ? 0.5 : 1,
               paddingLeft: scaffoldBlockPxWidth,
+              // width: scaffoldBlockPxWidth,
               ...style,
             }}
           >

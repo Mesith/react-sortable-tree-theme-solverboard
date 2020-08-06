@@ -11,15 +11,16 @@
   position: absolute;
   top: 0;
   bottom: 0;
-  width: 80%;
+  left: 0;
+  right: 0;
 }
 
 .validDrop {
-  background: #26C281;
+  background: #26c281;
 }
 
 .invalidDrop {
-  background: #C0392B;
+  background: #c0392b;
 }
 
 .highlight {

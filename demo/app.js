@@ -3,6 +3,24 @@ import SortableTree, { toggleExpandedForAll } from 'react-sortable-tree';
 import CustomTheme from '../index';
 import './app.css';
 
+const ListItem = ({ avatarUrl, titleText }) => (
+  <div
+    style={{
+      width: "100%",
+      display: "flex",
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
+    }}
+  >
+    <p>subtasks</p>
+    <p>type</p>
+    <p>target</p>
+    <img className="avatar" src={avatarUrl} alt="user avatar" />
+    <p>status</p>
+  </div>
+);
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -12,7 +30,7 @@ class App extends Component {
       searchFocusIndex: 0,
       searchFoundCount: null,
       treeData: [
-        { title: 'This is the Full Node Drag theme' },
+        { title: 'This is the Full Node Drag theme', details: <ListItem level={1} entityID={123} avatarUrl="https://i.pravatar.cc/30" />, children: [{ title: "Egg" }] },
         { title: 'You can click anywhere on the node to drag it' },
         {
           title: 'This node has dragging disabled',
@@ -63,9 +81,9 @@ class App extends Component {
 
       global.alert(
         'Info passed to the icon and button generators:\n\n' +
-          `node: {\n   ${objectString}\n},\n` +
-          `path: [${path.join(', ')}],\n` +
-          `treeIndex: ${treeIndex}`
+        `node: {\n   ${objectString}\n},\n` +
+        `path: [${path.join(', ')}],\n` +
+        `treeIndex: ${treeIndex}`
       );
     };
 
@@ -144,8 +162,8 @@ class App extends Component {
             onChange={this.updateTreeData}
             searchQuery={searchString}
             searchFocusOffset={searchFocusIndex}
-            style={{width: '600px'}}
-            rowHeight={45}
+            style={{ width: '80%' }}
+            rowHeight={40}
             searchFinishCallback={matches =>
               this.setState({
                 searchFoundCount: matches.length,
@@ -156,7 +174,8 @@ class App extends Component {
             canDrag={({ node }) => !node.dragDisabled}
             generateNodeProps={rowInfo => ({
               buttons: [
-                <button onClick={() => alertNodeInfo(rowInfo)}>i</button>,
+                <button onClick={() => alertNodeInfo(rowInfo)}>&#43;</button>,
+                <button onClick={() => alertNodeInfo(rowInfo)}>&#8594;</button>,
               ],
             })}
           />

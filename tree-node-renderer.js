@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styles from './tree-node-renderer.scss';
 
 class MinimalThemeTreeNodeRenderer extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
 
     this.state = {}
@@ -13,14 +13,14 @@ class MinimalThemeTreeNodeRenderer extends Component {
     }
   }
 
-  handleMouseOver () {
+  handleMouseOver() {
     if (!this.state.highlight) {
-      this.setState({highlight: true})
+      this.setState({ highlight: true })
     }
   }
 
-  handleMouseLeave () {
-    this.setState({highlight: false})
+  handleMouseLeave() {
+    this.setState({ highlight: false })
   }
 
   render() {
@@ -54,10 +54,10 @@ class MinimalThemeTreeNodeRenderer extends Component {
     }
 
     return connectDropTarget(
-      <div {...otherProps} onMouseOver={this.bound.handleMouseOver} onMouseLeave={this.bound.handleMouseLeave} {...otherProps} onFocus={ () => {} } className={styles.node + (this.state.highlight ? ` ${styles.highlight}` : '') + (dropType ? ` ${styles[dropType]}` : '')}>
+      <div {...otherProps} onMouseOver={this.bound.handleMouseOver} onMouseLeave={this.bound.handleMouseLeave} {...otherProps} onFocus={() => { }} className={styles.node + (this.state.highlight ? ` ${styles.highlight}` : '') + (dropType ? ` ${styles[dropType]}` : '')}>
         <div
           className={styles.nodeContent}
-          style={{paddingLeft: scaffoldBlockPxWidth * scaffoldBlockCount}}
+          style={{ paddingLeft: scaffoldBlockPxWidth * scaffoldBlockCount, width: `Calc(100% - ${scaffoldBlockPxWidth * scaffoldBlockCount})` }}
         >
           {Children.map(children, child =>
             cloneElement(child, {
