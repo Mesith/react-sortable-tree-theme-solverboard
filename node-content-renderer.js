@@ -63,8 +63,7 @@ class MinimalThemeNodeContentRenderer extends Component {
       <div className={styles.rowLabel}>
         <span
           className={
-            styles.rowTitle + ' foo ' +
-            (node.subtitle ? ` ${styles.rowTitleWithSubtitle}` : '')
+            `${styles.rowTitle} foo ${node.subtitle ? ` ${styles.rowTitleWithSubtitle}` : ''}`
           }
         >
           {typeof nodeTitle === 'function'
@@ -151,11 +150,10 @@ class MinimalThemeNodeContentRenderer extends Component {
           }
         >
           <div
-            className={'i-am-a-foo-row ' +
-              styles.row +
-              (isLandingPadActive ? ` ${styles.rowLandingPad}` : '') +
-              (isLandingPadActive && !canDrop ? ` ${styles.rowCancelPad}` : '') +
-              (className ? ` ${className}` : '')
+            className={`${styles.row
+              }${isLandingPadActive ? ` ${styles.rowLandingPad}` : ''
+              }${isLandingPadActive && !canDrop ? ` ${styles.rowCancelPad}` : ''
+              }${className ? ` ${className}` : ''}`
             }
             style={{
               opacity: isDraggedDescendant ? 0.5 : 1,
@@ -179,6 +177,7 @@ MinimalThemeNodeContentRenderer.defaultProps = {
   canDrag: false,
   canDrop: false,
   className: '',
+  details: null,
   draggedNode: null,
   icons: [],
   isSearchFocus: false,
@@ -198,6 +197,7 @@ MinimalThemeNodeContentRenderer.propTypes = {
   buttons: PropTypes.arrayOf(PropTypes.node),
   canDrag: PropTypes.bool,
   className: PropTypes.string,
+  details: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
   icons: PropTypes.arrayOf(PropTypes.node),
   isSearchFocus: PropTypes.bool,
   isSearchMatch: PropTypes.bool,
@@ -227,7 +227,7 @@ MinimalThemeNodeContentRenderer.propTypes = {
   // Drop target
   canDrop: PropTypes.bool,
   isOver: PropTypes.bool.isRequired,
-  rowDirection: PropTypes.string.isRequired
+  rowDirection: PropTypes.string
 };
 
 export default MinimalThemeNodeContentRenderer;

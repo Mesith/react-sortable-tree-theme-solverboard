@@ -1,7 +1,7 @@
 {
-  "name": "react-sortable-tree-theme-minimal",
-  "version": "0.0.13",
-  "description": "Minimal theme for react-sortable-tree",
+  "name": "react-sortable-tree-theme-solverboard",
+  "version": "0.0.1",
+  "description": "Customised theme for react-sortable-tree forked from react-sortable-tree-theme-minimal",
   "scripts": {
     "build": "npm run clean && cross-env NODE_ENV=production TARGET=umd webpack --bail",
     "build:demo": "npm run clean:demo && cross-env NODE_ENV=production TARGET=demo webpack --bail",
@@ -19,12 +19,12 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/lifejuggler/react-sortable-tree-theme-minimal"
+    "url": "https://github.com/sbays/react-sortable-tree-theme-minimal"
   },
-  "homepage": "https://github.com/lifejuggler/react-sortable-tree-theme-minimal",
-  "bugs": "https://github.com/lifejuggler/react-sortable-tree-theme-minimal/issues",
+  "homepage": "https://github.com/sbays/react-sortable-tree-theme-minimal",
+  "bugs": "https://github.com/sbays/react-sortable-tree-theme-minimal/issues",
   "authors": [
-    "Tom Choi"
+    "Simon Bays"
   ],
   "license": "MIT",
   "jest": {

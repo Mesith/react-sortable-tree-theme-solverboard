@@ -1,19 +1,19 @@
-# Minimal React Sortable Tree Theme
+# Minimal React Sortable Tree Theme for Solverboard
 <img alt="theme appearance" src="./example-resource/main.png" width="500">
 
 ## Features
-* Minimalistic Theme for React Sortable Tree
+* Customised Theme for React Sortable Tree - forked from react-sortable-tree-theme-minimal
 
 ## Usage
 
 ```sh
-npm install --save react-sortable-tree-theme-minimal
+npm install --save react-sortable-tree-theme-solverboard
 ```
 
 ```jsx
 import React, { Component } from 'react';
 import SortableTree from 'react-sortable-tree';
-import FileExplorerTheme from 'react-sortable-tree-theme-minimal';
+import FileExplorerTheme from 'react-sortable-tree-theme-solverboard';
 
 export default class Tree extends Component {
   constructor(props) {
