@@ -25,6 +25,7 @@ class MinimalThemeNodeContentRenderer extends Component {
       canDrag,
       node,
       title,
+      borderColor,
       details,
       subtitle,
       draggedNode,
@@ -49,6 +50,7 @@ class MinimalThemeNodeContentRenderer extends Component {
     const nodeTitle = title || node.title;
     const nodeSubtitle = subtitle || node.subtitle;
     const nodeDetails = details || node.details;
+    const nodeBorderColor = borderColor || node.borderColor;
 
     const isDraggedDescendant = draggedNode && isDescendant(draggedNode, node);
     const isLandingPadActive = !didDrop && isDragging;
@@ -59,6 +61,9 @@ class MinimalThemeNodeContentRenderer extends Component {
         (isSearchFocus ? ` ${styles.rowSearchFocus}` : '') +
         (!canDrag ? ` ${styles.rowContentsDragDisabled}` : '')
       }
+      style={{
+        borderLeftColor: nodeBorderColor,
+      }}
     >
       <div className={styles.rowLabel}>
         <span
@@ -177,6 +182,7 @@ MinimalThemeNodeContentRenderer.defaultProps = {
   canDrag: false,
   canDrop: false,
   className: '',
+  borderColor: null,
   details: null,
   draggedNode: null,
   icons: [],
@@ -193,15 +199,25 @@ MinimalThemeNodeContentRenderer.defaultProps = {
   rowDirection: 'ltr'
 };
 
+const nodeShape = {
+  title: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
+  subtitle: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
+  details: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
+};
+nodeShape.children = PropTypes.arrayOf(PropTypes.shape(nodeShape));
+
+const Node = PropTypes.shape(nodeShape);
+
 MinimalThemeNodeContentRenderer.propTypes = {
   buttons: PropTypes.arrayOf(PropTypes.node),
   canDrag: PropTypes.bool,
   className: PropTypes.string,
+  borderColor: PropTypes.string,
   details: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
   icons: PropTypes.arrayOf(PropTypes.node),
   isSearchFocus: PropTypes.bool,
   isSearchMatch: PropTypes.bool,
-  node: PropTypes.shape({}).isRequired,
+  node: Node.isRequired,
   path: PropTypes.arrayOf(
     PropTypes.oneOfType([PropTypes.string, PropTypes.number])
   ).isRequired,

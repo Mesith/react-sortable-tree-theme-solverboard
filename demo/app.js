@@ -1,9 +1,10 @@
+import PropTypes from "prop-types";
 import React, { Component } from 'react';
 import SortableTree, { toggleExpandedForAll } from 'react-sortable-tree';
 import CustomTheme from '../index';
 import './app.css';
 
-const ListItem = ({ avatarUrl, titleText }) => (
+const ListItem = ({ avatarUrl }) => (
   <div
     style={{
       width: "100%",
@@ -21,6 +22,10 @@ const ListItem = ({ avatarUrl, titleText }) => (
   </div>
 );
 
+ListItem.propTypes = {
+  avatarUrl: PropTypes.string.isRequired,
+}
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -30,14 +35,14 @@ class App extends Component {
       searchFocusIndex: 0,
       searchFoundCount: null,
       treeData: [
-        { title: 'This is the Full Node Drag theme', details: <ListItem level={1} entityID={123} avatarUrl="https://i.pravatar.cc/30" />, children: [{ title: "Egg" }] },
+        { title: 'This is the Full Node Drag theme', borderColor: 'red', details: <ListItem level={1} entityID={123} avatarUrl="https://i.pravatar.cc/30" />, children: [{ title: "Egg" }] },
         { title: 'You can click anywhere on the node to drag it' },
         {
           title: 'This node has dragging disabled',
           subtitle: 'Note how the hover behavior is different',
           dragDisabled: true,
         },
-        { title: 'Chicken', children: [{ title: 'Egg' }] },
+        { title: 'Chicken', children: [{ title: 'Egg', borderColor: '#ff00aa' }] },
       ],
     };
     this.updateTreeData = this.updateTreeData.bind(this);

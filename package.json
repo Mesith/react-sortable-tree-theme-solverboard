@@ -1,6 +1,6 @@
 {
   "name": "react-sortable-tree-theme-solverboard",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "Customised theme for react-sortable-tree forked from react-sortable-tree-theme-minimal",
   "scripts": {
     "build": "npm run clean && cross-env NODE_ENV=production TARGET=umd webpack --bail",
