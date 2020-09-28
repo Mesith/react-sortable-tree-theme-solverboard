@@ -24,6 +24,7 @@ class MinimalThemeNodeContentRenderer extends Component {
       canDrop,
       canDrag,
       node,
+      level,
       title,
       borderColor,
       details,
@@ -51,6 +52,7 @@ class MinimalThemeNodeContentRenderer extends Component {
     const nodeSubtitle = subtitle || node.subtitle;
     const nodeDetails = details || node.details;
     const nodeBorderColor = borderColor || node.borderColor;
+    const nodeLevel = level || node.level;
 
     const isDraggedDescendant = draggedNode && isDescendant(draggedNode, node);
     const isLandingPadActive = !didDrop && isDragging;
@@ -59,7 +61,8 @@ class MinimalThemeNodeContentRenderer extends Component {
         styles.rowContents +
         (isSearchMatch ? ` ${styles.rowSearchMatch}` : '') +
         (isSearchFocus ? ` ${styles.rowSearchFocus}` : '') +
-        (!canDrag ? ` ${styles.rowContentsDragDisabled}` : '')
+        (!canDrag ? ` ${styles.rowContentsDragDisabled}` : '') +
+        (nodeLevel ? ` level-${nodeLevel}` : '')
       }
       style={{
         borderLeftColor: nodeBorderColor,
@@ -68,7 +71,7 @@ class MinimalThemeNodeContentRenderer extends Component {
       <div className={styles.rowLabel}>
         <span
           className={
-            `${styles.rowTitle} foo ${node.subtitle ? ` ${styles.rowTitleWithSubtitle}` : ''}`
+            `${styles.rowTitle} ${node.subtitle ? ` ${styles.rowTitleWithSubtitle}` : ''}`
           }
         >
           {typeof nodeTitle === 'function'
@@ -182,6 +185,7 @@ MinimalThemeNodeContentRenderer.defaultProps = {
   canDrag: false,
   canDrop: false,
   className: '',
+  level: null,
   borderColor: null,
   details: null,
   draggedNode: null,
@@ -212,6 +216,7 @@ MinimalThemeNodeContentRenderer.propTypes = {
   buttons: PropTypes.arrayOf(PropTypes.node),
   canDrag: PropTypes.bool,
   className: PropTypes.string,
+  level: PropTypes.number,
   borderColor: PropTypes.string,
   details: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
   icons: PropTypes.arrayOf(PropTypes.node),

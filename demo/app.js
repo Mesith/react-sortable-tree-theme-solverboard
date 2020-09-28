@@ -36,13 +36,13 @@ class App extends Component {
       searchFoundCount: null,
       treeData: [
         { title: 'This is the Full Node Drag theme', borderColor: 'red', details: <ListItem level={1} entityID={123} avatarUrl="https://i.pravatar.cc/30" />, children: [{ title: "Egg" }] },
-        { title: 'You can click anywhere on the node to drag it' },
+        { title: 'You can click anywhere on the node to drag it', level: 1 },
         {
           title: 'This node has dragging disabled',
           subtitle: 'Note how the hover behavior is different',
           dragDisabled: true,
         },
-        { title: 'Chicken', children: [{ title: 'Egg', borderColor: '#ff00aa' }] },
+        { title: 'Chicken', level: 1, children: [{ title: 'Egg', level: 2, borderColor: '#ff00aa' }] },
       ],
     };
     this.updateTreeData = this.updateTreeData.bind(this);
